@@ -7,6 +7,6 @@ namespace Contracts
 {
     public interface ICompanyRepository
     {
-        IEnumerable<Company> FindAll();
+        IEnumerable<Company> GetAllCompanies(bool trackChanges);
     }
 }

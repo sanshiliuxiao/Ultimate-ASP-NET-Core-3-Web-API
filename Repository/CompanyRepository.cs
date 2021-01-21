@@ -14,9 +14,10 @@ namespace Repository
         {
 
         }
-        public IEnumerable<Company> FindAll()
+
+        public IEnumerable<Company> GetAllCompanies(bool trackChanges)
         {
-            return base.FindAll(false).ToList();
+            return FindAll(trackChanges).OrderBy(c => c.Name).ToList();
         }
     }
 }

@@ -18,3 +18,4 @@
 2021-01-21 12:48:19.8651 DEBUG Here is debug message from our values controller.
 2021-01-21 12:48:19.8651 WARN Here is warn message from our values controller.
 2021-01-21 12:48:19.8651 ERROR Here is an error message from our values controller.
+2021-01-21 19:44:06.0029 INFO good GetCompanies

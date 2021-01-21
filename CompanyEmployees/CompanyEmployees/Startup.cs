@@ -1,3 +1,4 @@
+using AutoMapper;
 using CompanyEmployees.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +40,8 @@ namespace CompanyEmployees
             //web api 在 3.1 中 AddControllers 取代了 AddMvc
             // 不需要 View 视图
             services.AddControllers();
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
