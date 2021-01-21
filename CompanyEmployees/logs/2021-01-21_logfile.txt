@@ -1,0 +1,20 @@
+2021-01-21 12:07:06.5595 INFO Here is info message from our values controller.
+2021-01-21 12:07:06.5998 DEBUG Here is debug message from our values controller.
+2021-01-21 12:07:06.5998 WARN Here is warn message from our values controller.
+2021-01-21 12:07:06.5998 ERROR Here is an error message from our values controller.
+2021-01-21 12:26:04.8526 INFO Here is info message from our values controller.
+2021-01-21 12:26:04.8776 DEBUG Here is debug message from our values controller.
+2021-01-21 12:26:04.8776 WARN Here is warn message from our values controller.
+2021-01-21 12:26:04.8953 ERROR Here is an error message from our values controller.
+2021-01-21 12:42:08.0975 INFO Here is info message from our values controller.
+2021-01-21 12:42:08.1162 DEBUG Here is debug message from our values controller.
+2021-01-21 12:42:08.1282 WARN Here is warn message from our values controller.
+2021-01-21 12:42:08.1282 ERROR Here is an error message from our values controller.
+2021-01-21 12:48:01.7985 INFO Here is info message from our values controller.
+2021-01-21 12:48:01.7985 DEBUG Here is debug message from our values controller.
+2021-01-21 12:48:01.8002 WARN Here is warn message from our values controller.
+2021-01-21 12:48:01.8002 ERROR Here is an error message from our values controller.
+2021-01-21 12:48:19.8477 INFO Here is info message from our values controller.
+2021-01-21 12:48:19.8651 DEBUG Here is debug message from our values controller.
+2021-01-21 12:48:19.8651 WARN Here is warn message from our values controller.
+2021-01-21 12:48:19.8651 ERROR Here is an error message from our values controller.
