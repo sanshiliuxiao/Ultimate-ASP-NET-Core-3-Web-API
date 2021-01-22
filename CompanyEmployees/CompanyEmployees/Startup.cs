@@ -53,7 +53,9 @@ namespace CompanyEmployees
                 config.RespectBrowserAcceptHeader = true;
                 // 限制 Media Types， 当 服务器不支持请求的 数据格式时， 会返回 406
                 config.ReturnHttpNotAcceptable = true;
-            }).AddXmlSerializerFormatters().AddCustomCSVFormatter();
+            }).AddNewtonsoftJson()
+            .AddXmlSerializerFormatters()
+            .AddCustomCSVFormatter();
 
         }
 
