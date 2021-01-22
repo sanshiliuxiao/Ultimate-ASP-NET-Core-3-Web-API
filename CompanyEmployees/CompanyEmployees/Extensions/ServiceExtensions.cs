@@ -65,5 +65,6 @@ namespace CompanyEmployees.Extensions
         {
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
+
     }
 }

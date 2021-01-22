@@ -1,5 +1,6 @@
 using AutoMapper;
 using CompanyEmployees.Extensions;
+using Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -45,7 +46,7 @@ namespace CompanyEmployees
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             // 中间件的启动顺序非常关键
             // UseStaticFiles UseCors 要在 UseRouting 之前
@@ -59,6 +60,10 @@ namespace CompanyEmployees
             {
                 app.UseHsts();
             }
+
+            // 全局错误响应
+            app.ConfigureExceptionHandler(logger);
+
 
             // 启用配置
 
