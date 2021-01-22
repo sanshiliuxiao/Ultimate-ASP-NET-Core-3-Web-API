@@ -16,3 +16,18 @@
    at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
    at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2021-01-22 09:34:27.8159 INFO Company with id: {id} does't exist in the database.
+2021-01-22 09:52:52.6741 INFO Company with id: 3d490a70-94ce-4d15-9491-5248280c2ce3 does't exist in the database.
+2021-01-22 10:00:14.9206 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:00:19.1853 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:00:25.0398 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:00:40.6094 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:01:04.8587 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:01:15.9807 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:01:34.3934 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:01:44.0578 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:01:51.7966 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:02:47.6580 INFO Employee with id: 86dba8c0-d178-41e7-938c-ed49778fb52a does't exist in the database
+2021-01-22 10:03:47.9245 INFO Employee with id: 80abbca8-664d-4b20-b5de-024705497d4a does't exist in the database
+2021-01-22 10:04:05.2456 INFO Employee with id: 80abbca8-664d-4b20-b5de-024705497d4a does't exist in the database
+2021-01-22 10:06:28.1601 INFO Employee with id: 80abbca8-664d-4b20-b5de-024705497d4a does't exist in the database
