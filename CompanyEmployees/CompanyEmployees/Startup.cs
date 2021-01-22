@@ -38,11 +38,23 @@ namespace CompanyEmployees
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
 
+            
+            services.AddAutoMapper(typeof(Startup));
+
             //web api 在 3.1 中 AddControllers 取代了 AddMvc
             // 不需要 View 视图
-            services.AddControllers();
+            // 添加内容协商， 支持返回 XML 使用 AddXmlDataContractSerializerFormatters
+            // 默认是返回 json 格式数据
+            
+            // ASP .NET Core 支持自定义数据格式
+            services.AddControllers(config =>
+            {
+                // 开启 Accept 字段
+                config.RespectBrowserAcceptHeader = true;
+                // 限制 Media Types， 当 服务器不支持请求的 数据格式时， 会返回 406
+                config.ReturnHttpNotAcceptable = true;
+            }).AddXmlSerializerFormatters().AddCustomCSVFormatter();
 
-            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
