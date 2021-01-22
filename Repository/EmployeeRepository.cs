@@ -21,6 +21,13 @@ namespace Repository
             Create(employee);
         }
 
+        public void DeleteEmployee(Employee employee)
+        {
+            // 一般在真实的业务中，不会删除掉数据，只会设置一个 删除标记
+
+            Delete(employee);
+        }
+
         public Employee GetEmployee(Guid companyId, Guid employeeId, bool trackChanges)
         {
 
