@@ -1,0 +1,4 @@
+2021-01-23 14:29:20.1921 ERROR EmployeeForCreation object sent from client is null.
+2021-01-23 14:29:28.0200 ERROR EmployeeForCreation object sent from client is null.
+2021-01-23 14:32:45.8169 ERROR Invalid model state for the EmployeeForCreationDto object
+2021-01-23 14:32:57.2948 ERROR Invalid model state for the EmployeeForCreationDto object

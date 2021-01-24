@@ -57,6 +57,15 @@ namespace CompanyEmployees
             .AddXmlSerializerFormatters()
             .AddCustomCSVFormatter();
 
+
+            // 自定义 WebApi 验证模型
+            services.Configure<ApiBehaviorOptions>(options => {
+
+                // 该选项开启后，会阻止 默认的 modelState valid 行为
+                // 但也能够灵活的在 action 使用 ModelState.IsValid 进行 判断操作。
+                // 或者传递 InvalidModelStateResponseFactory  委托，统一返回
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
