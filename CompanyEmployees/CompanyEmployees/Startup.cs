@@ -1,4 +1,5 @@
 using AutoMapper;
+using CompanyEmployees.ActionFilters;
 using CompanyEmployees.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.Builder;
@@ -66,6 +67,11 @@ namespace CompanyEmployees
                 // 或者传递 InvalidModelStateResponseFactory  委托，统一返回
                 options.SuppressModelStateInvalidFilter = true;
             });
+
+            // 注入 action filter
+            services.AddScoped<ValidationFilterAttribute>();
+            services.AddScoped<ValidateCompanyExistsAttribute>();
+            services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
