@@ -1,5 +1,6 @@
 using AutoMapper;
 using CompanyEmployees.ActionFilters;
+using CompanyEmployees.Dtos;
 using CompanyEmployees.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
+using Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,8 +48,10 @@ namespace CompanyEmployees
             // 不需要 View 视图
             // 添加内容协商， 支持返回 XML 使用 AddXmlDataContractSerializerFormatters
             // 默认是返回 json 格式数据
-            
+
             // ASP .NET Core 支持自定义数据格式
+
+            // 如果需要解析  ExpandoObject 类 不要使用 AddXmlSerializerFormatters 而是使用 AddXmlDataContractSerializerFormatters
             services.AddControllers(config =>
             {
                 // 开启 Accept 字段
@@ -55,7 +59,7 @@ namespace CompanyEmployees
                 // 限制 Media Types， 当 服务器不支持请求的 数据格式时， 会返回 406
                 config.ReturnHttpNotAcceptable = true;
             }).AddNewtonsoftJson()
-            .AddXmlSerializerFormatters()
+            .AddXmlDataContractSerializerFormatters()
             .AddCustomCSVFormatter();
 
 
@@ -72,6 +76,9 @@ namespace CompanyEmployees
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
+
+            // 注入 data shaping service
+            services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
