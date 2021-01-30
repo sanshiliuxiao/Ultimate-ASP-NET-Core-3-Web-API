@@ -2,6 +2,7 @@ using AutoMapper;
 using CompanyEmployees.ActionFilters;
 using CompanyEmployees.Dtos;
 using CompanyEmployees.Extensions;
+using CompanyEmployees.Utility;
 using Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -76,9 +77,16 @@ namespace CompanyEmployees
             services.AddScoped<ValidationFilterAttribute>();
             services.AddScoped<ValidateCompanyExistsAttribute>();
             services.AddScoped<ValidateEmployeeForCompanyExistsAttribute>();
+            services.AddScoped<ValidateMediaTypeAttribute>();
+
+            // 注入 HATEOAS
+            services.AddScoped<EmployeeLinks>();
 
             // 注入 data shaping service
             services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+
+            // 注入 自定义的媒体类型
+            services.AddCustomMediaTypes();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
