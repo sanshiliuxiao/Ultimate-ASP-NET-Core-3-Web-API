@@ -36,7 +36,7 @@ namespace CompanyEmployees.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetCompanies))]
         public async Task<IActionResult> GetCompanies()
         {
             //try
@@ -81,7 +81,7 @@ namespace CompanyEmployees.Controllers
             }
         }
     
-        [HttpPost]
+        [HttpPost(Name = nameof(CreateCompany))]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
         {
