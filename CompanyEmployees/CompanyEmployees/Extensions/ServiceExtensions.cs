@@ -1,4 +1,5 @@
-﻿using CompanyEmployees.CustomFormatters;
+﻿using AspNetCoreRateLimit;
+using CompanyEmployees.CustomFormatters;
 using Contracts;
 using Entities;
 using LoggerService;
@@ -140,6 +141,35 @@ namespace CompanyEmployees.Extensions
                 {
                     validationModelOptions.MustRevalidate = true;
                 });
+
+        }
+    
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services)
+        {
+            // 使用 AspNetCoreRateLimit 需要使用 AddMemoryCache
+
+            // 在 Startup 里面写
+            // services.AddMemoryCache();
+
+            // 配置规则
+            var rateLimitRules = new List<RateLimitRule>
+            {
+                new RateLimitRule
+                {
+                    Endpoint = "*",
+                    Limit = 5,
+                    Period = "1m"
+                }
+            };
+
+            services.Configure<IpRateLimitOptions>(options =>
+            {
+                options.GeneralRules = rateLimitRules;
+            });
+
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
         }
     }

@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using AutoMapper;
 using CompanyEmployees.ActionFilters;
 using CompanyEmployees.Dtos;
@@ -45,6 +46,10 @@ namespace CompanyEmployees
             services.ConfigureResponseCaching();
             services.ConfigureHttpCacheHeaders();
             services.AddAutoMapper(typeof(Startup));
+
+            services.AddMemoryCache();
+            services.ConfigureRateLimitingOptions();
+            services.AddHttpContextAccessor();
 
             //web api 在 3.1 中 AddControllers 取代了 AddMvc
             // 不需要 View 视图
@@ -127,6 +132,8 @@ namespace CompanyEmployees
                 ForwardedHeaders =ForwardedHeaders.All
             });
 
+            // 启用 Rate Limit
+            app.UseIpRateLimiting();
 
             // 启用路由
             app.UseRouting();
