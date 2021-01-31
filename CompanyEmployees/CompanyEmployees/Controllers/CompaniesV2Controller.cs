@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace CompanyEmployees.Controllers
 {
-    [ApiVersion("2.0")]
+    // 设置 Deprecate 属性为 true 表示 废弃，但并不删除它
+    [ApiVersion("2.0", Deprecated = true)]
     [Route("api/companies")]
     [Route("api/{v:apiversion}/companies")]
     [ApiController]

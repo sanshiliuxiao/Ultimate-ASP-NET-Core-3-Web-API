@@ -42,7 +42,8 @@ namespace CompanyEmployees
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryManager();
             services.ConfigureVersioning();
-            
+            services.ConfigureResponseCaching();
+            services.ConfigureHttpCacheHeaders();
             services.AddAutoMapper(typeof(Startup));
 
             //web api 在 3.1 中 AddControllers 取代了 AddMvc
@@ -59,6 +60,10 @@ namespace CompanyEmployees
                 config.RespectBrowserAcceptHeader = true;
                 // 限制 Media Types， 当 服务器不支持请求的 数据格式时， 会返回 406
                 config.ReturnHttpNotAcceptable = true;
+
+                // 全局设置 public cache 时间
+
+                config.CacheProfiles.Add("120SecondsDuration", new CacheProfile { Duration = 120 });
             }).AddNewtonsoftJson()
             .AddXmlDataContractSerializerFormatters()
             .AddCustomCSVFormatter();
@@ -122,8 +127,13 @@ namespace CompanyEmployees
                 ForwardedHeaders =ForwardedHeaders.All
             });
 
+
             // 启用路由
             app.UseRouting();
+
+            // 启用缓存
+            app.UseResponseCaching();
+            app.UseHttpCacheHeaders();
 
             // 启用授权
             app.UseAuthorization();

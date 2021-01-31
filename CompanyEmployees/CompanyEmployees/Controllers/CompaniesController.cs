@@ -4,6 +4,7 @@ using CompanyEmployees.Dtos;
 using CompanyEmployees.ModelBinders;
 using Contracts;
 using Entities.Models;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -36,7 +37,12 @@ namespace CompanyEmployees.Controllers
             return Ok();
         }
 
+
+        // 因为设置了全局的 app.UseHttpCacheHeaders(); 导致 ResponseCache 属性失效，如果需要单独设置，则需要 HttpCacheExpiration 属性
         [HttpGet(Name = nameof(GetCompanies))]
+        // [ResponseCache(CacheProfileName = "120SecondsDuration")] // 获取到 startup 里面设置的 缓存名字
+        [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)]
+        [HttpCacheValidation(MustRevalidate = true)]
         public async Task<IActionResult> GetCompanies()
         {
             //try
@@ -66,6 +72,10 @@ namespace CompanyEmployees.Controllers
         }
         
         [HttpGet("{id}", Name = "CompanyById")]
+
+        // 因为设置了全局的 app.UseHttpCacheHeaders(); 导致 ResponseCache 属性失效，如果需要单独设置，则需要 HttpCacheExpiration 属性
+        // [ResponseCache(Duration = 300000)] // 设置过期时间 30 s
+ 
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var company = await _repository.Company.GetCompanyAsync(id, false);
