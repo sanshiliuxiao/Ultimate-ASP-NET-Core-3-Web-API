@@ -5,6 +5,7 @@ using LoggerService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -99,6 +100,25 @@ namespace CompanyEmployees.Extensions
                 }
             });
 
+        }
+    
+        public static void ConfigureVersioning(this IServiceCollection services)
+        {
+            // 注册 api version 服务， 设置默认的版本为 1
+            services.AddApiVersioning(options =>
+            {
+                // 将 api version 加入 response header
+                options.ReportApiVersions = true;
+                // 假设所有 没加 ApiVersion 属性的 controllers 为 默认版本
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                // 设置默认版本号 1
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+
+                // 默认可以通过查询字符串进行版本更替访问，
+                // 但可以通过设置 ApiVersionReader 属性，变成在  request header 里面进行控制
+                options.ApiVersionReader = new HeaderApiVersionReader("api-version");
+            
+            });
         }
     }
 }
