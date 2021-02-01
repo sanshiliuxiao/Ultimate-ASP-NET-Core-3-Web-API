@@ -51,6 +51,13 @@ namespace CompanyEmployees
             services.ConfigureRateLimitingOptions();
             services.AddHttpContextAccessor();
 
+
+            // Identity
+            services.ConfigureIdentity();
+            // JWT
+            services.ConfigureJWT(Configuration);
+
+
             //web api 在 3.1 中 AddControllers 取代了 AddMvc
             // 不需要 View 视图
             // 添加内容协商， 支持返回 XML 使用 AddXmlDataContractSerializerFormatters
@@ -97,6 +104,9 @@ namespace CompanyEmployees
 
             // 注入 自定义的媒体类型
             services.AddCustomMediaTypes();
+
+            // 注入 Auth 服务
+            services.AddScoped<IAuthenticationManager, AuthenticationManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -141,6 +151,10 @@ namespace CompanyEmployees
             // 启用缓存
             app.UseResponseCaching();
             app.UseHttpCacheHeaders();
+
+
+            // 先鉴权（身份验证）
+            app.UseAuthentication();
 
             // 启用授权
             app.UseAuthorization();

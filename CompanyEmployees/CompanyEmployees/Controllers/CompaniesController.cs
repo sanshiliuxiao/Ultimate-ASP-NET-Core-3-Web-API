@@ -5,6 +5,7 @@ using CompanyEmployees.ModelBinders;
 using Contracts;
 using Entities.Models;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -39,7 +40,7 @@ namespace CompanyEmployees.Controllers
 
 
         // 因为设置了全局的 app.UseHttpCacheHeaders(); 导致 ResponseCache 属性失效，如果需要单独设置，则需要 HttpCacheExpiration 属性
-        [HttpGet(Name = nameof(GetCompanies))]
+        [HttpGet(Name = nameof(GetCompanies)), Authorize(Roles = "Administrator, Manager")]
         // [ResponseCache(CacheProfileName = "120SecondsDuration")] // 获取到 startup 里面设置的 缓存名字
         [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 60)]
         [HttpCacheValidation(MustRevalidate = true)]
