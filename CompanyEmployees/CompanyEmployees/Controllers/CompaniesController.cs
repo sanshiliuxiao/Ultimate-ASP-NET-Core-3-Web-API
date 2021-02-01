@@ -18,6 +18,7 @@ namespace CompanyEmployees.Controllers
     
     [ApiController]
     [Route("api/companies")]
+    [ApiExplorerSettings(GroupName = "v1")] // 标记 v1 版本
     public class CompaniesController : ControllerBase
     {
         private readonly IRepositoryManager _repository;
@@ -31,6 +32,11 @@ namespace CompanyEmployees.Controllers
             _mapper = mapper;
         }
 
+
+        /// <summary>
+        /// 获取 http options
+        /// </summary>
+        /// <returns></returns>
         [HttpOptions]
         public IActionResult GetCompaniesOptions()
         {
@@ -39,6 +45,10 @@ namespace CompanyEmployees.Controllers
         }
 
 
+        /// <summary>
+        /// 获取所有公司
+        /// </summary>
+        /// <returns>返回所有公司</returns>
         // 因为设置了全局的 app.UseHttpCacheHeaders(); 导致 ResponseCache 属性失效，如果需要单独设置，则需要 HttpCacheExpiration 属性
         [HttpGet(Name = nameof(GetCompanies)), Authorize(Roles = "Administrator, Manager")]
         // [ResponseCache(CacheProfileName = "120SecondsDuration")] // 获取到 startup 里面设置的 缓存名字
@@ -72,11 +82,16 @@ namespace CompanyEmployees.Controllers
             return Ok(compainesDto);
         }
         
+        /// <summary>
+        /// 获取指定一家公司
+        /// </summary>
+        /// <param name="id">Guid id</param>
+        /// <returns>返回指定公司</returns>
         [HttpGet("{id}", Name = "CompanyById")]
 
         // 因为设置了全局的 app.UseHttpCacheHeaders(); 导致 ResponseCache 属性失效，如果需要单独设置，则需要 HttpCacheExpiration 属性
         // [ResponseCache(Duration = 300000)] // 设置过期时间 30 s
- 
+
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var company = await _repository.Company.GetCompanyAsync(id, false);
@@ -91,9 +106,20 @@ namespace CompanyEmployees.Controllers
                 return Ok(companyDto);
             }
         }
-    
+
+        /// <summary>
+        /// Creates a newly created company
+        /// </summary>
+        /// <param name="company"></param>
+        /// <returns>A newly created company</returns>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>
+        /// <response code="422">If the model is invalid</response>
         [HttpPost(Name = nameof(CreateCompany))]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(422)]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
         {
             var companyEntity = _mapper.Map<Company>(company);

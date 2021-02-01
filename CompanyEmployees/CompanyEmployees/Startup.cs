@@ -57,6 +57,8 @@ namespace CompanyEmployees
             // JWT
             services.ConfigureJWT(Configuration);
 
+            // Swagger
+            services.ConfigureSwagger();
 
             //web api 在 3.1 中 AddControllers 取代了 AddMvc
             // 不需要 View 视图
@@ -129,6 +131,8 @@ namespace CompanyEmployees
             app.ConfigureExceptionHandler(logger);
 
 
+            
+
             // 启用配置
 
             // 启动静态文件 默认访问 wwwroot 文件夹
@@ -155,6 +159,14 @@ namespace CompanyEmployees
 
             // 先鉴权（身份验证）
             app.UseAuthentication();
+
+            // SwaggerUI
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Code Maze API v1");
+                s.SwaggerEndpoint("/swagger/v2/swagger.json", "Code Maze API v2");
+            });
 
             // 启用授权
             app.UseAuthorization();

@@ -33,6 +33,11 @@ namespace CompanyEmployees.Controllers
             _authManager = authManager;
         }
 
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="userForRegistration"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
@@ -70,7 +75,12 @@ namespace CompanyEmployees.Controllers
             return StatusCode(201);
 
         }
-    
+        
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="userDto"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userDto)

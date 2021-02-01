@@ -15,9 +15,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -76,7 +78,6 @@ namespace CompanyEmployees.Extensions
         {
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         }
-
 
         public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder)
         {
@@ -221,6 +222,69 @@ namespace CompanyEmployees.Extensions
                 };
             });
         
+        }
+    
+        public static void ConfigureSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("v1", new OpenApiInfo 
+                { 
+                    Title = "Code Maze API", 
+                    Version = "v1",
+                    Description = "CompanyEmployees API by CodeMaze",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Joho Doe",
+                        Email = "John.Doe@gmail.com",
+                        Url = new Uri("https://baidu.com")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "CompanyEmployees API LICX",
+                        Url = new Uri("https://baidu.com")
+                    }
+                });
+                s.SwaggerDoc("v2", new OpenApiInfo { Title = "Code Maze API", Version = "v1" });
+
+                // 支持 XML 注释
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile); ;
+                s.IncludeXmlComments(xmlPath);
+
+
+                // 添加 JWT 认证
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme 
+                {
+                    Description ="JWT Authorization header using the Bearer scheme   Example: 'Bearer 1234sasd' ",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header
+                        },
+                        new List<string>()
+                    }
+                });
+            });
+
+
         }
     }
 }

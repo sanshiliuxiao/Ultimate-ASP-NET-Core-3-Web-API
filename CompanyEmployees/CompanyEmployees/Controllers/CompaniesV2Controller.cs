@@ -12,6 +12,7 @@ namespace CompanyEmployees.Controllers
     [ApiVersion("2.0", Deprecated = true)]
     [Route("api/companies")]
     [Route("api/{v:apiversion}/companies")]
+    [ApiExplorerSettings(GroupName = "v2")] // 标记 v2 版本
     [ApiController]
     public class CompaniesV2Controller : ControllerBase
     {

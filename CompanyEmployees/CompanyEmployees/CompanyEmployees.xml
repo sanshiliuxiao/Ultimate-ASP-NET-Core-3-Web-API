@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CompanyEmployees</name>
+    </assembly>
+    <members>
+        <member name="M:CompanyEmployees.Controllers.AuthenticationController.RegisterUser(CompanyEmployees.Dtos.UserForRegistrationDto)">
+            <summary>
+            注册
+            </summary>
+            <param name="userForRegistration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CompanyEmployees.Controllers.AuthenticationController.Authenticate(CompanyEmployees.Dtos.UserForAuthenticationDto)">
+            <summary>
+            登录
+            </summary>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CompanyEmployees.Controllers.CompaniesController.GetCompaniesOptions">
+            <summary>
+            获取 http options
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CompanyEmployees.Controllers.CompaniesController.GetCompanies">
+            <summary>
+            获取所有公司
+            </summary>
+            <returns>返回所有公司</returns>
+        </member>
+        <member name="M:CompanyEmployees.Controllers.CompaniesController.GetCompany(System.Guid)">
+            <summary>
+            获取指定一家公司
+            </summary>
+            <param name="id">Guid id</param>
+            <returns>返回指定公司</returns>
+        </member>
+        <member name="M:CompanyEmployees.Controllers.CompaniesController.CreateCompany(CompanyEmployees.Dtos.CompanyForCreationDto)">
+            <summary>
+            Creates a newly created company
+            </summary>
+            <param name="company"></param>
+            <returns>A newly created company</returns>
+            <response code="201">Returns the newly created item</response>
+            <response code="400">If the item is null</response>
+            <response code="422">If the model is invalid</response>
+        </member>
+    </members>
+</doc>
