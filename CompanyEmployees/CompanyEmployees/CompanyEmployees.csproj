@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>7088f7cb-44ac-41cc-8323-a3b22d1e9b57</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -33,6 +34,12 @@
     <ProjectReference Include="..\..\Entities\Entities.csproj" />
     <ProjectReference Include="..\..\LoggerService\LoggerService.csproj" />
     <ProjectReference Include="..\..\Repository\Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CompanyEmployees.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 
